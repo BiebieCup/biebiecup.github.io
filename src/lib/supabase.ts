@@ -3,8 +3,8 @@ import { createClient } from '@supabase/supabase-js';
 // These are the public environment variables - replace with your actual Supabase project credentials
 // For GitHub Pages deployment, set these in your repository secrets and use a build step
 // or configure them directly here for static deployment
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://your-project.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'your-anon-key';
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://qftucmopynuhmvayvpjs.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFmdHVjbW9weW51aG12YXl2cGpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzODQ4OTIsImV4cCI6MjA5Mzk2MDg5Mn0.R5nuG_g5wLDGauGy-m2y-be_0Ihk0monrtpmNzIlsqw';
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
