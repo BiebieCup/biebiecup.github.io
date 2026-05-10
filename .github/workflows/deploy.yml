@@ -5,7 +5,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write  # Change this from read to write
   pages: write
   id-token: write
 
