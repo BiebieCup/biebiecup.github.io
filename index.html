@@ -11,11 +11,32 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-gradient-start: #FFD8A8;
+            --bg-gradient-end: #87CEEB;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-primary: #2c3e50;
+            --text-secondary: #555;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --border-color: #ddd;
+        }
+
+        [data-theme="dark"] {
+            --bg-gradient-start: #2c3e50;
+            --bg-gradient-end: #34495e;
+            --card-bg: rgba(44, 62, 80, 0.95);
+            --text-primary: #ecf0f1;
+            --text-secondary: #bdc3c7;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --border-color: #34495e;
+        }
+
         body {
             font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            transition: all 0.3s ease;
         }
 
         /* 动态渐变背景 */
@@ -25,22 +46,49 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #FFD8A8, #87CEEB);
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
             background-size: 400% 400%;
             animation: gradientMove 15s ease infinite;
             z-index: -1;
+            transition: all 0.5s ease;
         }
 
         @keyframes gradientMove {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 主题切换按钮 */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-toggle span {
+            font-size: 1.2em;
+        }
+
+        .theme-toggle-text {
+            color: var(--text-primary);
+            font-weight: bold;
+            font-size: 0.9em;
         }
 
         /* 容器 */
@@ -48,39 +96,42 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            padding-top: 80px;
         }
 
         /* 头部 */
         header {
             text-align: center;
             padding: 60px 20px;
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--card-bg);
             border-radius: 20px;
             margin-bottom: 40px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px var(--shadow);
             backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
         h1 {
             font-size: 3em;
-            color: #2c3e50;
+            color: var(--text-primary);
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 2px 2px 4px var(--shadow);
         }
 
         .subtitle {
             font-size: 1.2em;
-            color: #555;
+            color: var(--text-secondary);
             margin-bottom: 10px;
         }
 
         /* 赛事信息卡片 */
         .info-section {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s ease;
         }
 
         .info-section h2 {
@@ -117,11 +168,12 @@
 
         /* 历届谱面下载区域 */
         .download-section {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s ease;
         }
 
         .download-section h2 {
@@ -139,8 +191,8 @@
         }
 
         .edition-card {
-            background: white;
-            border: 2px solid #ddd;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
             border-radius: 12px;
             padding: 25px;
             transition: all 0.3s ease;
@@ -154,13 +206,13 @@
         }
 
         .edition-card h3 {
-            color: #2c3e50;
+            color: var(--text-primary);
             margin-bottom: 15px;
             font-size: 1.5em;
         }
 
         .edition-info {
-            color: #666;
+            color: var(--text-secondary);
             margin-bottom: 15px;
             font-size: 0.9em;
         }
@@ -195,13 +247,23 @@
             box-shadow: none;
         }
 
+        .qq-section {
+            margin-top: 30px;
+            text-align: center;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+        }
+
         /* 页脚 */
         footer {
             text-align: center;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.9);
+            background: var(--card-bg);
             border-radius: 15px;
             margin-top: 30px;
+            transition: all 0.3s ease;
         }
 
         footer a {
@@ -215,8 +277,16 @@
             color: #2980b9;
         }
 
+        footer p {
+            color: var(--text-secondary);
+        }
+
         /* 响应式设计 */
         @media (max-width: 768px) {
+            .container {
+                padding-top: 100px;
+            }
+
             h1 {
                 font-size: 2em;
             }
@@ -228,23 +298,34 @@
             .edition-list {
                 grid-template-columns: 1fr;
             }
+
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="animated-bg"></div>
 
+    <!-- 主题切换按钮 -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <span id="themeIcon">🌙</span>
+        <span class="theme-toggle-text" id="themeText">暗色模式</span>
+    </div>
+
     <div class="container">
         <!-- 头部 -->
         <header>
-            <h1>🎵 憋憋杯 BBC 🎵</h1>
+            <h1>憋憋杯 BiebieCup</h1>
             <p class="subtitle">Phigros 自制谱面创作赛事</p>
-            <p class="subtitle">主办方：5071</p>
+            <p class="subtitle">主办方：你们好啊我是伍零柒壹我去你的吧</p>
         </header>
 
         <!-- 6thBBC 赛事信息 -->
         <section class="info-section">
-            <h2>📢 第七届憋憋杯 (6thBBC)</h2>
+            <h2>📢 第六届憋憋杯 (6thBBC)</h2>
             <div class="info-grid">
                 <div class="info-card">
                     <h3>📅 赛事时间</h3>
@@ -269,19 +350,16 @@
                     <p>❌ 禁止刷票</p>
                 </div>
             </div>
-            <div style="margin-top: 30px; text-align: center; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 10px; color: white;">
+            <div class="qq-section">
                 <h3 style="margin-bottom: 10px;">💬 交流群</h3>
                 <p style="font-size: 1.5em; font-weight: bold;">335109209</p>
-                <p style="margin-top: 10px; font-size: 0.9em;">欢迎萌新和大佬参加！</p>
             </div>
         </section>
 
         <!-- 历届谱面下载 -->
         <section class="download-section">
             <h2>📥 历届谱面下载</h2>
-            <div class="edition-list" id="editionList">
-                <!-- 将通过JavaScript动态生成 -->
-            </div>
+            <div class="edition-list" id="editionList"></div>
         </section>
 
         <!-- 页脚 -->
@@ -289,7 +367,7 @@
             <p>© 2024-2027 憋憋杯 BBC | 主办方：5071</p>
             <p style="margin-top: 10px;">
                 <a href="https://github.com" target="_blank">GitHub</a> | 
-                <a href="#" onclick="alert('QQ群：335109209')">联系我们</a>
+                <a href="#" onclick="alert('QQ群：335109209'); return false;">联系我们</a>
             </p>
         </footer>
     </div>
@@ -297,54 +375,13 @@
     <script>
         // 历届赛事数据
         const editions = [
-            {
-                name: '第六届憋憋杯',
-                code: '5thBBC',
-                year: '2025',
-                info: '往届精彩谱面作品集',
-                downloadLink: '#', // 替换为实际下载链接
-                available: false
-            },
-            {
-                name: '第五届憋憋杯',
-                code: '4thBBC',
-                year: '2024',
-                info: '往届精彩谱面作品集',
-                downloadLink: '#',
-                available: false
-            },
-            {
-                name: '第四届憋憋杯',
-                code: '3rdBBC',
-                year: '2023',
-                info: '往届精彩谱面作品集',
-                downloadLink: '#',
-                available: false
-            },
-            {
-                name: '第三届憋憋杯',
-                code: '2ndBBC',
-                year: '2022',
-                info: '往届精彩谱面作品集',
-                downloadLink: '#',
-                available: false
-            },
-            {
-                name: '第二届憋憋杯',
-                code: '1stBBC',
-                year: '2021',
-                info: '往届精彩谱面作品集',
-                downloadLink: '#',
-                available: false
-            },
-            {
-                name: '第一届憋憋杯',
-                code: '0thBBC',
-                year: '2020',
-                info: '往届精彩谱面作品集',
-                downloadLink: '#',
-                available: false
-            }
+            { name: '第六届憋憋杯', code: '5thBBC', year: '2026', info: '往届精彩谱面作品集', available: true },
+            { name: '第五届憋憋杯', code: '4thBBC', year: '2025', info: '往届精彩谱面作品集', available: true },
+            { name: '第四届憋憋杯', code: '3rdBBC', year: '2025', info: '往届精彩谱面作品集', available: true },
+            { name: '第三届憋憋杯', code: '2ndBBC', year: '2024', info: '往届精彩谱面作品集', available: true },
+            { name: '第二届憋憋杯', code: '1stBBC', year: '2024', info: '往届精彩谱面作品集', available: true },
+            { name: '第一届憋憋杯', code: '0thBBC', year: '2023', info: '往届精彩谱面作品集', available: true },
+            { name: '第一届憋憋杯预热赛', code: '0thBBC', year: '2023', info: '往届精彩谱面作品集', available: true }
         ];
 
         // 动态生成历届赛事卡片
@@ -359,11 +396,10 @@
                     <h3>${edition.name}</h3>
                     <p class="edition-info">📅 ${edition.year} | ${edition.code}</p>
                     <p class="edition-info">${edition.info}</p>
-                    <a href="${edition.downloadLink}" 
+                    <a href="${edition.available ? 'download.html?edition=' + edition.code : '#'}" 
                        class="download-btn ${!edition.available ? 'disabled' : ''}"
-                       ${!edition.available ? 'onclick="return false;"' : ''}
-                       ${edition.available ? 'download' : ''}>
-                        ${edition.available ? '⬇️ 立即下载' : '🔒 整理中'}
+                       ${!edition.available ? 'onclick="return false;"' : ''}>
+                        ${edition.available ? '⬇️ 查看谱面' : '🔒 整理中'}
                     </a>
                 `;
                 
@@ -371,23 +407,43 @@
             });
         }
 
-        // 页面加载时执行
+        // 主题切换功能
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // 更新按钮文字和图标
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+            
+            if (newTheme === 'dark') {
+                icon.textContent = '☀️';
+                text.textContent = '亮色模式';
+            } else {
+                icon.textContent = '🌙';
+                text.textContent = '暗色模式';
+            }
+        }
+
+        // 页面加载时恢复主题
         window.onload = function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+            
+            if (savedTheme === 'dark') {
+                icon.textContent = '☀️';
+                text.textContent = '亮色模式';
+            }
+            
             renderEditions();
         };
-
-        // 添加平滑滚动效果
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
     </script>
 </body>
 </html>
