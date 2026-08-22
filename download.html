@@ -337,14 +337,692 @@
 
     <script>
         // 谱面数据库（由 Python 程序生成）
-        const chartsDatabase = {
-            '5thBBC': [],
-            '4thBBC': [],
-            '3rdBBC': [],
-            '2ndBBC': [],
-            '1stBBC': [],
-            '0thBBC': []
-        };
+const chartsDatabase = {
+    '5thBBC': [
+        {
+            title: 'CONTINUING HEART',
+            author: 'Tone feat. 初音ミク',
+            difficulties: ['EZ'],
+            levels: ['13'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/5thBBC/G-CONTINUING HEART.pez'
+        },
+        {
+            title: 'Wo Xiang Si (Inst.)',
+            author: 'APTV',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/5thBBC/G-JX Wo Xiang Si (Inst.).pez'
+        },
+        {
+            title: 'Symphony Op.1 -CHAOS-',
+            author: 'Laur',
+            difficulties: ['EZ'],
+            levels: ['16'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/5thBBC/G-Symphony Op.1 -CHAOS-.pez'
+        },
+        {
+            title: 'UNUSED LEVELS',
+            author: 'ぱらどっと',
+            difficulties: ['EZ'],
+            levels: ['16'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/5thBBC/G-UNUSED LEVELS.pez'
+        },
+        {
+            title: '弥渡山歌（PHONK）',
+            author: '羊音乐',
+            difficulties: ['EZ'],
+            levels: ['15'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/5thBBC/G-弥渡山歌（PHONK）.pez'
+        },
+        {
+            title: '彷徨いの冥～天～',
+            author: '天宮みや & 姫城碧海',
+            difficulties: ['EZ'],
+            levels: ['14'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/5thBBC/G-彷徨いの冥～天～.pez'
+        },
+        {
+            title: 'Thrash Forse',
+            author: 'KAH vs. E0ri4',
+            difficulties: ['EZ'],
+            levels: ['16'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/5thBBC/J-Thrash Forse(1st comp ver.).pez'
+        },
+        {
+            title: '你先别急',
+            author: '晴海、乐正绫、洛天依、言和',
+            difficulties: ['EZ'],
+            levels: ['0'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/5thBBC/J-你先别急.pez'
+        },
+        {
+            title: '守墓の樹躯',
+            author: '隣の庭は青い(庭師+Aoi)',
+            difficulties: ['EZ'],
+            levels: ['61'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/5thBBC/J-守墓の樹躯.pez'
+        },
+        {
+            title: '我爱时代少年团',
+            author: '豆包AI',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/5thBBC/J-我爱时代少年团.pez'
+        },
+        {
+            title: '贝贝',
+            author: '李荣浩',
+            difficulties: ['EZ'],
+            levels: ['1'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/5thBBC/J-贝贝.pez'
+        },
+    ],
+    '4thBBC': [
+    ],
+    '3rdBBC': [
+        {
+            title: 'lowercase lifetime',
+            author: 'ZAQUVA',
+            difficulties: ['EZ'],
+            levels: ['15'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G1 lowercase lifetime.pez'
+        },
+        {
+            title: 'Run',
+            author: 'BiebieCup',
+            difficulties: ['EZ'],
+            levels: ['5071'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G10 Run.pez'
+        },
+        {
+            title: 'Winter ↑ Cube ↓ (Original Mix)',
+            author: '李祥晖 & NceS & cty丶max',
+            difficulties: ['EZ'],
+            levels: ['14'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G11 Winter ↑ Cube ↓ (Original Mix).pez'
+        },
+        {
+            title: 'Halcyon',
+            author: 'xi',
+            difficulties: ['EZ'],
+            levels: ['15'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G12 Halcyon.pez'
+        },
+        {
+            title: 'Take Flight',
+            author: 'Lindsey Stirling',
+            difficulties: ['EZ'],
+            levels: ['16'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G13 Take Flight.pez'
+        },
+        {
+            title: 'Virtual Sanctuary(虚幻圣所)',
+            author: 'Getty/DJ DiA/USAO',
+            difficulties: ['EZ'],
+            levels: ['15'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G14 Virtual Sanctuary(虚幻圣所).pez'
+        },
+        {
+            title: 'milky way galaxy',
+            author: 'tatsuyangu',
+            difficulties: ['EZ'],
+            levels: ['16'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G2 milky way galaxy.pez'
+        },
+        {
+            title: 'mourning,Stagnant',
+            author: 'saaa',
+            difficulties: ['EZ', 'HD'],
+            levels: ['16', '5'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G3 mourning,Stagnant.pez'
+        },
+        {
+            title: '「COSMIC IMPULSE」',
+            author: 'aishite/sad keybprad guy',
+            difficulties: ['EZ'],
+            levels: ['16'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G4「COSMIC IMPULSE」.pez'
+        },
+        {
+            title: 'πevergod',
+            author: 'nm-y',
+            difficulties: ['EZ'],
+            levels: ['17'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G5 限制定数 πevergod.pez'
+        },
+        {
+            title: 'REFLECTION',
+            author: 'XH/KYURO3/YUTRAZIUM',
+            difficulties: ['EZ'],
+            levels: ['17'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G6 REFLECTION.pez'
+        },
+        {
+            title: 'Poet of the Stars',
+            author: 'Cre-sc3NT',
+            difficulties: ['EZ'],
+            levels: ['14'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G7 Poet of the Stars.pez'
+        },
+        {
+            title: 'Astral Quantization',
+            author: 'Dj Grimoire',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G8 Astral Quantization.pez'
+        },
+        {
+            title: 'Tsubasa Mai Kaze',
+            author: '烈風',
+            difficulties: ['EZ'],
+            levels: ['15'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/3rdBBC/G9 Tsubasa Mai Kaze.pez'
+        },
+        {
+            title: 'Double Finger Course ~ REGRET ~ [幻影鬼魅（PLAESE）1.00x ~ Xi ~ ]',
+            author: 'R300K',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J1 Double Finger Course ~ REGRET ~ [幻影鬼魅（PLAESE）1.00x ~ Xi ~ ].pez'
+        },
+        {
+            title: 'April Geopelia',
+            author: 'Phigros',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J10 April Geopelia.pez'
+        },
+        {
+            title: '唐人TV之：刚~满~十~八~岁~(哪吒DJ版）',
+            author: '未知 vs. 谱师',
+            difficulties: ['EZ', 'HD'],
+            levels: ['18', '60'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J11 唐人TV之：刚~满~十~八~岁~(哪吒DJ版）.pez'
+        },
+        {
+            title: '音游说唱 (音ゲーラップ)',
+            author: 'Project Nirvana',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J12 音游说唱 (音ゲーラップ).pez'
+        },
+        {
+            title: 'Sense(?)',
+            author: '原告：BilliumMoto × Silentroom   被告：姜果-Brown',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J13 Sense().pez'
+        },
+        {
+            title: 'BATTLE NO.2',
+            author: 'TANO*C Sound Team(design by τomato)',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J14 BATTLE NO.2.pez'
+        },
+        {
+            title: 'go to BBC',
+            author: 'ErBi & Doubao',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J15 go to BBC.pez'
+        },
+        {
+            title: 'Axium Crisis',
+            author: 'ak+q',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J16 Axium Crisis.pez'
+        },
+        {
+            title: 'Hello(BPM)2025',
+            author: 'かめりあ',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J17 Hello(BPM)2025.pez'
+        },
+        {
+            title: '[Normal]Belle de Nuit',
+            author: '黒皇帝 feat. AKA',
+            difficulties: ['EZ'],
+            levels: ['13'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J18 Belle de Nuit.pez'
+        },
+        {
+            title: 'Lost Civilization',
+            author: 'Laur vs. CK',
+            difficulties: ['EZ'],
+            levels: ['1'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J2 Lost Civilization.pez'
+        },
+        {
+            title: 'mopemare(LeaF Songs Mashup Medley)',
+            author: 'LeaF(music) & BieBieCup(mashup)',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J3 mopemare(LeaF Songs Mashup Medley).pez'
+        },
+        {
+            title: 'slic.hertz',
+            author: 'Sobrom',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J4 slic.hertz.pez'
+        },
+        {
+            title: 'Ultimate Force',
+            author: 'Sakuzyo',
+            difficulties: ['EZ', 'HD'],
+            levels: ['5071', '17'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J5 Ultimate Force.pez'
+        },
+        {
+            title: '♿️QZKago Requiem♿️',
+            author: '默雪SilentSnow',
+            difficulties: ['EZ'],
+            levels: ['10'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J6 ♿️QZKago Requiem♿️(biebiecup).pez'
+        },
+        {
+            title: '999',
+            author: 'Camellia/RoughSketch',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J7 999.pez'
+        },
+        {
+            title: 'Victory&Defeat',
+            author: 'UK',
+            difficulties: ['EZ'],
+            levels: ['17'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J8 Victory&Defeat.pez'
+        },
+        {
+            title: 'Speculation',
+            author: 'ZAQUVA',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/3rdBBC/J9 Speculation.pez'
+        },
+    ],
+    '2ndBBC': [
+        {
+            title: 'my (new) beginning',
+            author: 'they',
+            difficulties: ['EZ'],
+            levels: ['17'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/2ndBBC/G - my (new) beginning.pez'
+        },
+        {
+            title: 'TIEFSEE',
+            author: 'SOUND HOLIC Vs. dj TAKA feat. YURiCa',
+            difficulties: ['EZ'],
+            levels: ['15'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/2ndBBC/G - TIEFSEE.pez'
+        },
+        {
+            title: 'Apollo',
+            author: 'TJ.hangneil',
+            difficulties: ['EZ'],
+            levels: ['5071'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - Apollo.pez'
+        },
+        {
+            title: 'BRAIN HACKER',
+            author: 'SOMON',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - BRAIN HACKER.pez'
+        },
+        {
+            title: 'Breakcore WTF!?',
+            author: 'LeaF',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - Breakcore WTF!？.pez'
+        },
+        {
+            title: 'Cat Paradise',
+            author: 'Laur',
+            difficulties: ['EZ'],
+            levels: ['14'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - Cat Paradise.pez'
+        },
+        {
+            title: 'Eden',
+            author: '"漆黒"の堕天使《Gram》†Versus† "聖刻"の熾天使《Gram》',
+            difficulties: ['EZ'],
+            levels: ['18'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - Eden.pez'
+        },
+        {
+            title: 'Hello (BPM) 2024',
+            author: 'かめりあ',
+            difficulties: ['EZ'],
+            levels: ['16'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - Hello (BPM) 2024(慎开).pez'
+        },
+        {
+            title: 'Kung-gu Empire',
+            author: '飛馬23',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - Kung-gu Empire.pez'
+        },
+        {
+            title: 'Message;BOMB!!',
+            author: 'Kurast703 design. #1f1e33 and shenqu,wozhidexinshang',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - Message;BOMB!!.pez'
+        },
+        {
+            title: 'SUMMER FESTA (精华片段)',
+            author: 'IVE',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - SUMMER FESTA (精华片段).pez'
+        },
+        {
+            title: 'UnHello(BPM)2024',
+            author: 'かめりあ',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - UnHello(BPM)2024(慎开).pez'
+        },
+        {
+            title: 'α煩悩',
+            author: '有形ランペイジ',
+            difficulties: ['EZ'],
+            levels: ['14'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - α煩悩.pez'
+        },
+        {
+            title: '∀NOMALY',
+            author: 'かめりあ',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - ∀NOMALY最终版不改了.pez'
+        },
+        {
+            title: '♿️Der Richter♿️',
+            author: 'Ωμεγα/DJKaren',
+            difficulties: ['EZ'],
+            levels: ['114514'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - 电棍：Der Richter.pez'
+        },
+        {
+            title: '驟雨の狭間',
+            author: 'Silentroom',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - 驟雨の狭間.pez'
+        },
+        {
+            title: '？',
+            author: '？',
+            difficulties: ['EZ'],
+            levels: ['0'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/2ndBBC/J - ？.pez'
+        },
+    ],
+    '1stBBC': [
+        {
+            title: 'ひとりごつ',
+            author: 'ちいかわ',
+            difficulties: ['EZ'],
+            levels: ['1'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/1stBBC/G1.pez'
+        },
+        {
+            title: 'Boss Rush',
+            author: 'USAO',
+            difficulties: ['EZ'],
+            levels: ['2'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/1stBBC/G2.pez'
+        },
+        {
+            title: 'PANDORA PARADOXXX',
+            author: '削除',
+            difficulties: ['EZ'],
+            levels: ['1'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/1stBBC/J1.pez'
+        },
+        {
+            title: 'PANDORA',
+            author: 'Sakuzyo',
+            difficulties: ['EZ'],
+            levels: ['10'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/1stBBC/J10.pez'
+        },
+        {
+            title: 'jsl',
+            author: 'q',
+            difficulties: ['EZ'],
+            levels: ['11'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/1stBBC/J11.pez'
+        },
+        {
+            title: 'Sound Chimera',
+            author: 'Laur',
+            difficulties: ['EZ'],
+            levels: ['12'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/1stBBC/J12.pez'
+        },
+        {
+            title: 'セガサターン起動音[H.][Remix]',
+            author: 'Hiro',
+            difficulties: ['EZ'],
+            levels: ['2'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/1stBBC/J2.pez'
+        },
+        {
+            title: 'Metamorphosism',
+            author: 'Sakuzyo',
+            difficulties: ['EZ'],
+            levels: ['3'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/1stBBC/J3.pez'
+        },
+        {
+            title: 'volcanic',
+            author: 'LuzeriA',
+            difficulties: ['EZ'],
+            levels: ['4'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/1stBBC/J4.pez'
+        },
+        {
+            title: 'Untitled',
+            author: 'FeCO3',
+            difficulties: ['EZ'],
+            levels: ['5'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/1stBBC/J5.pez'
+        },
+        {
+            title: 'Finishman Tatttttttt',
+            author: 'J.J.QURELESS',
+            difficulties: ['EZ'],
+            levels: ['6'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/1stBBC/J6.pez'
+        },
+        {
+            title: 'RICH MAN 3 OP',
+            author: '台湾大宇资讯公司®1996',
+            difficulties: ['EZ'],
+            levels: ['7'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/1stBBC/J7.pez'
+        },
+        {
+            title: 'ouroVoros',
+            author: 'Team Grimoire',
+            difficulties: ['EZ'],
+            levels: ['8'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/1stBBC/J8.pez'
+        },
+        {
+            title: 'the EmpErroR',
+            author: 'sasakure.UK',
+            difficulties: ['EZ'],
+            levels: ['9'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/1stBBC/J9.pez'
+        },
+        {
+            title: 'Avantgarde',
+            author: 'Raimukun',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/1stBBC/JEnd.pez'
+        },
+    ],
+    '0thBBC': [
+        {
+            title: 'Altale',
+            author: 'Sakuzyo',
+            difficulties: ['EZ'],
+            levels: ['9'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/0thBBC/G-Altale.pez'
+        },
+        {
+            title: 'Class Memories',
+            author: 'Antistar / Ctymax',
+            difficulties: ['EZ'],
+            levels: ['13'],
+            tags: ['常规赛道'],
+            downloadLink: './charts/0thBBC/G-Class Memories.pez'
+        },
+        {
+            title: 'Can you get joy',
+            author: 'Jack Stauber',
+            difficulties: ['EZ'],
+            levels: ['11'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/0thBBC/J-Can you get Joy.pez'
+        },
+        {
+            title: 'QQ',
+            author: 'BEMANI Sound Team ”PHQUASE & ZAQUVA”',
+            difficulties: ['EZ'],
+            levels: ['15'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/0thBBC/J-QQ.pez'
+        },
+        {
+            title: 'Random',
+            author: 'Sobrem / Silentroom',
+            difficulties: ['EZ'],
+            levels: ['16'],
+            tags: ['娱乐赛道'],
+            downloadLink: './charts/0thBBC/J-Random.pez'
+        },
+        {
+            title: 'Crush Beta',
+            author: 'shadow_bling',
+            difficulties: ['EZ'],
+            levels: ['114514'],
+            tags: ['大粪赛道'],
+            downloadLink: './charts/0thBBC/S-Crush BETA.pez'
+        },
+        {
+            title: 'ER↑',
+            author: 'Magic ZC Index & Jalen',
+            difficulties: ['EZ'],
+            levels: ['18018'],
+            tags: ['大粪赛道'],
+            downloadLink: './charts/0thBBC/S-ER↑.pez'
+        },
+        {
+            title: 'Villain Virus',
+            author: 'Kobaryo/かめりあ',
+            difficulties: ['??'],
+            levels: ['?'],
+            tags: ['大粪赛道'],
+            downloadLink: './charts/0thBBC/S-Villain Virus.pez'
+        },
+        {
+            title: '天使重构',
+            author: 'HOYO-MiX',
+            difficulties: ['EZ'],
+            levels: ['1919'],
+            tags: ['大粪赛道'],
+            downloadLink: './charts/0thBBC/S-天使重构.pez'
+        },
+    ],
+};
 
         let currentEdition = '';
         let allCharts = [];
