@@ -220,6 +220,10 @@
         .tag.difficulty-hd { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
         .tag.difficulty-in { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
         .tag.difficulty-at { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        
+        .tag.track-regular { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .tag.track-fun { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .tag.track-shit { background: linear-gradient(135deg, #8e44ad 0%, #c0392b 100%); }
 
         .download-single-btn {
             width: 100%;
@@ -318,7 +322,7 @@
         </div>
 
         <div class="search-box">
-            <input type="text" class="search-input" id="searchInput" placeholder="🔍 搜索谱面名称、作者或难度...">
+            <input type="text" class="search-input" id="searchInput" placeholder="🔍 搜索谱面名称、曲师或难度...">
         </div>
 
         <div class="charts-grid" id="chartsGrid"></div>
@@ -332,54 +336,44 @@
     </div>
 
     <script>
-        // 谱面数据库（示例数据）
+        // 谱面数据库（示例数据 - 实际数据由 Python 程序生成）
         const chartsDatabase = {
             '5thBBC': [
                 {
                     title: 'Example Song 1',
-                    author: '谱师A',
-                    charter: '参赛者1',
+                    author: '曲师A',
                     difficulties: ['EZ', 'HD', 'IN', 'AT'],
                     levels: ['5', '9', '13', '15'],
-                    tags: ['常规赛道', '单人'],
-                    downloadLink: '#'
+                    tags: ['常规赛道'],
+                    downloadLink: 'charts/5thBBC/G-example1.pez'
                 },
                 {
                     title: 'Example Song 2',
-                    author: '谱师B',
-                    charter: '参赛者2',
+                    author: '曲师B',
                     difficulties: ['HD', 'IN'],
                     levels: ['10', '14'],
-                    tags: ['娱乐赛道', '多人'],
-                    downloadLink: '#'
+                    tags: ['娱乐赛道'],
+                    downloadLink: 'charts/5thBBC/J-example2.pez'
                 },
                 {
                     title: 'Example Song 3',
-                    author: '谱师C',
-                    charter: '参赛者3',
+                    author: '曲师C',
                     difficulties: ['EZ', 'HD', 'IN', 'AT'],
                     levels: ['6', '11', '14', '16'],
-                    tags: ['常规赛道', '单人'],
-                    downloadLink: '#'
-                }
-                // 添加更多谱面数据...
-            ],
-            '4thBBC': [
-                {
-                    title: 'Test Chart A',
-                    author: '作者X',
-                    charter: '创作者X',
-                    difficulties: ['HD', 'IN', 'AT'],
-                    levels: ['8', '12', '15'],
                     tags: ['常规赛道'],
-                    downloadLink: '#'
+                    downloadLink: 'charts/5thBBC/G-example3.pez'
                 }
-                // 添加更多...
             ],
-            '3rdBBC': [],
-            '2ndBBC': [],
-            '1stBBC': [],
-            '0thBBC': []
+            '0thBBC': [
+                {
+                    title: 'Test Chart',
+                    author: '作者X',
+                    difficulties: ['HD', 'IN'],
+                    levels: ['8', '12'],
+                    tags: ['大粪赛道'],
+                    downloadLink: 'charts/0thBBC/S-test.pez'
+                }
+            ]
         };
 
         let currentEdition = '';
@@ -391,6 +385,14 @@
             var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
             var results = regex.exec(location.search);
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // 获取赛道标签样式类
+        function getTrackClass(tag) {
+            if (tag === '常规赛道') return 'track-regular';
+            if (tag === '娱乐赛道') return 'track-fun';
+            if (tag === '大粪赛道') return 'track-shit';
+            return '';
         }
 
         // 渲染谱面列表
@@ -413,13 +415,12 @@
                 ).join('');
 
                 const tagsHtml = chart.tags.map(tag => 
-                    `<span class="tag">${tag}</span>`
+                    `<span class="tag ${getTrackClass(tag)}">${tag}</span>`
                 ).join('');
                 
                 card.innerHTML = `
                     <div class="chart-title">🎵 ${chart.title}</div>
                     <div class="chart-info">🎼 曲师：${chart.author}</div>
-                    <div class="chart-info">✍️ 谱师：${chart.charter}</div>
                     <div class="chart-tags">
                         ${difficultiesHtml}
                         ${tagsHtml}
@@ -440,7 +441,6 @@
             const filtered = allCharts.filter(chart => {
                 return chart.title.toLowerCase().includes(searchTerm) ||
                        chart.author.toLowerCase().includes(searchTerm) ||
-                       chart.charter.toLowerCase().includes(searchTerm) ||
                        chart.difficulties.some(d => d.toLowerCase().includes(searchTerm)) ||
                        chart.tags.some(t => t.toLowerCase().includes(searchTerm));
             });
@@ -451,14 +451,13 @@
         // 下载单个谱面
         function downloadChart(index) {
             const chart = allCharts[index];
-            alert(`正在下载：${chart.title}\n（实际使用时替换为真实下载链接）`);
-            // window.location.href = chart.downloadLink;
+            window.location.href = chart.downloadLink;
         }
 
         // 批量下载
         function downloadAll() {
             alert(`正在打包下载 ${currentEdition} 全部谱面...\n（实际使用时替换为真实下载链接）`);
-            // window.location.href = 'path/to/all-charts.zip';
+            // window.location.href = `charts/${currentEdition}/all.zip`;
         }
 
         // 主题切换
@@ -497,7 +496,7 @@
             }
 
             // 获取届次
-            currentEdition = getUrlParameter('edition') || '6thBBC';
+            currentEdition = getUrlParameter('edition') || '5thBBC';
             allCharts = chartsDatabase[currentEdition] || [];
 
             // 更新标题
@@ -507,8 +506,8 @@
                 '4thBBC': '第四届憋憋杯',
                 '3rdBBC': '第三届憋憋杯',
                 '2ndBBC': '第二届憋憋杯',
-                '1stBBC': '第一届憋憋杯',
-                '0thBBC': '第一届憋憋杯预热赛'
+                '1stBBC': '第一届憋憋杯'
+                '0thBBC': '第一届憋憋杯（预热赛）'
             };
 
             document.getElementById('editionTitle').textContent = editionNames[currentEdition] + ' 谱面下载';
