@@ -39,7 +39,6 @@
             transition: all 0.3s ease;
         }
 
-        /* 动态渐变背景 */
         .animated-bg {
             position: fixed;
             top: 0;
@@ -59,7 +58,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* 主题切换按钮 */
         .theme-toggle {
             position: fixed;
             top: 20px;
@@ -91,7 +89,6 @@
             font-size: 0.9em;
         }
 
-        /* 容器 */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -99,7 +96,6 @@
             padding-top: 80px;
         }
 
-        /* 头部 */
         header {
             text-align: center;
             padding: 60px 20px;
@@ -124,7 +120,6 @@
             margin-bottom: 10px;
         }
 
-        /* 赛事信息卡片 */
         .info-section {
             background: var(--card-bg);
             border-radius: 15px;
@@ -166,7 +161,6 @@
             font-size: 1.3em;
         }
 
-        /* 历届谱面下载区域 */
         .download-section {
             background: var(--card-bg);
             border-radius: 15px;
@@ -256,7 +250,6 @@
             color: white;
         }
 
-        /* 页脚 */
         footer {
             text-align: center;
             padding: 30px;
@@ -281,7 +274,6 @@
             color: var(--text-secondary);
         }
 
-        /* 响应式设计 */
         @media (max-width: 768px) {
             .container {
                 padding-top: 100px;
@@ -309,21 +301,18 @@
 <body>
     <div class="animated-bg"></div>
 
-    <!-- 主题切换按钮 -->
     <div class="theme-toggle" onclick="toggleTheme()">
         <span id="themeIcon">🌙</span>
         <span class="theme-toggle-text" id="themeText">暗色模式</span>
     </div>
 
     <div class="container">
-        <!-- 头部 -->
         <header>
             <h1>🎵 憋憋杯 BBC 🎵</h1>
             <p class="subtitle">Phigros 自制谱面创作赛事</p>
-            <p class="subtitle">主办方：你说得对我是伍零柒壹</p>
+            <p class="subtitle">主办方：伍零柒1</p>
         </header>
 
-        <!-- 6thBBC 赛事信息 -->
         <section class="info-section">
             <h2>📢 第六届憋憋杯 (6thBBC)</h2>
             <div class="info-grid">
@@ -357,35 +346,31 @@
             </div>
         </section>
 
-        <!-- 历届谱面下载 -->
         <section class="download-section">
             <h2>📥 历届谱面下载</h2>
             <div class="edition-list" id="editionList"></div>
         </section>
 
-        <!-- 页脚 -->
         <footer>
-            <p>© 2023-2026 憋憋杯 BBC | 主办方：伍零柒壹</p>
+            <p>© 2024-2027 憋憋杯 BBC | 主办方：5071</p>
             <p style="margin-top: 10px;">
-                <a href="https://github.com/biebiecup" target="_blank">GitHub</a> | 
+                <a href="https://github.com" target="_blank">GitHub</a> | 
                 <a href="#" onclick="alert('QQ群：335109209'); return false;">联系我们</a>
             </p>
         </footer>
     </div>
 
     <script>
-        // 历届赛事数据
+        // 历届赛事数据（不包含第六届）
         const editions = [
-            { name: '第六届憋憋杯', code: '6thBBC', year: '2025', info: '往届精彩谱面作品集', available: false },
             { name: '第五届憋憋杯', code: '5thBBC', year: '2025', info: '往届精彩谱面作品集', available: true },
-            { name: '第四届憋憋杯', code: '4thBBC', year: '2024', info: '往届精彩谱面作品集', available: true },
+            { name: '第四届憋憋杯', code: '4thBBC', year: '2025', info: '往届精彩谱面作品集', available: true },
             { name: '第三届憋憋杯', code: '3rdBBC', year: '2024', info: '往届精彩谱面作品集', available: true },
-            { name: '第二届憋憋杯', code: '2ndBBC', year: '2023', info: '往届精彩谱面作品集', available: true },
+            { name: '第二届憋憋杯', code: '2ndBBC', year: '2024', info: '往届精彩谱面作品集', available: true },
             { name: '第一届憋憋杯', code: '1stBBC', year: '2023', info: '往届精彩谱面作品集', available: true },
-            { name: '第一届憋憋杯（预热赛）', code: '0thBBC', year: '2023', info: '往届精彩谱面作品集', available: true }
+            { name: '第一届预热赛', code: '0thBBC', year: '2023', info: '往届精彩谱面作品集', available: true }
         ];
 
-        // 动态生成历届赛事卡片
         function renderEditions() {
             const container = document.getElementById('editionList');
             
@@ -408,7 +393,6 @@
             });
         }
 
-        // 主题切换功能
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
@@ -417,7 +401,6 @@
             html.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             
-            // 更新按钮文字和图标
             const icon = document.getElementById('themeIcon');
             const text = document.getElementById('themeText');
             
@@ -430,7 +413,6 @@
             }
         }
 
-        // 页面加载时恢复主题
         window.onload = function() {
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
