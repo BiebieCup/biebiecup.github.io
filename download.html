@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>谱面下载 - 憋憋杯 BBC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-gradient-start: #FFD8A8;
+            --bg-gradient-end: #87CEEB;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-primary: #2c3e50;
+            --text-secondary: #555;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --border-color: #ddd;
+            --hover-bg: #f8f9fa;
+        }
+
+        [data-theme="dark"] {
+            --bg-gradient-start: #2c3e50;
+            --bg-gradient-end: #34495e;
+            --card-bg: rgba(44, 62, 80, 0.95);
+            --text-primary: #ecf0f1;
+            --text-secondary: #bdc3c7;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --border-color: #34495e;
+            --hover-bg: rgba(52, 73, 94, 0.5);
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
+            z-index: -1;
+            transition: all 0.5s ease;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+        }
+
+        .theme-toggle span {
+            font-size: 1.2em;
+        }
+
+        .theme-toggle-text {
+            color: var(--text-primary);
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-top: 80px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        .download-header {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .download-header h1 {
+            color: var(--text-primary);
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .download-header p {
+            color: var(--text-secondary);
+            font-size: 1.1em;
+        }
+
+        .search-box {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1em;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .chart-card:hover {
+            border-color: #3498db;
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+            transform: translateY(-3px);
+            background: var(--hover-bg);
+        }
+
+        .chart-title {
+            color: var(--text-primary);
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .chart-info {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .chart-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .tag.difficulty-ez { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .tag.difficulty-hd { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .tag.difficulty-in { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .tag.difficulty-at { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+
+        .download-single-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        .download-single-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .batch-download {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 20px var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .batch-download h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .batch-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .batch-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            color: var(--text-secondary);
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding-top: 100px;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .download-header h1 {
+                font-size: 1.8em;
+            }
+
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <span id="themeIcon">🌙</span>
+        <span class="theme-toggle-text" id="themeText">暗色模式</span>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">
+            ← 返回主页
+        </a>
+
+        <div class="download-header">
+            <h1 id="editionTitle">谱面下载</h1>
+            <p id="editionDesc">选择你想要下载的谱面</p>
+        </div>
+
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="🔍 搜索谱面名称、作者或难度...">
+        </div>
+
+        <div class="charts-grid" id="chartsGrid"></div>
+
+        <div class="batch-download">
+            <h3>💾 打包下载本届全部谱面</h3>
+            <a href="#" class="batch-btn" id="batchDownloadBtn" onclick="downloadAll(); return false;">
+                ⬇️ 一键下载全部
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // 谱面数据库（示例数据）
+        const chartsDatabase = {
+            '5thBBC': [
+                {
+                    title: 'Example Song 1',
+                    author: '谱师A',
+                    charter: '参赛者1',
+                    difficulties: ['EZ', 'HD', 'IN', 'AT'],
+                    levels: ['5', '9', '13', '15'],
+                    tags: ['常规赛道', '单人'],
+                    downloadLink: '#'
+                },
+                {
+                    title: 'Example Song 2',
+                    author: '谱师B',
+                    charter: '参赛者2',
+                    difficulties: ['HD', 'IN'],
+                    levels: ['10', '14'],
+                    tags: ['娱乐赛道', '多人'],
+                    downloadLink: '#'
+                },
+                {
+                    title: 'Example Song 3',
+                    author: '谱师C',
+                    charter: '参赛者3',
+                    difficulties: ['EZ', 'HD', 'IN', 'AT'],
+                    levels: ['6', '11', '14', '16'],
+                    tags: ['常规赛道', '单人'],
+                    downloadLink: '#'
+                }
+                // 添加更多谱面数据...
+            ],
+            '4thBBC': [
+                {
+                    title: 'Test Chart A',
+                    author: '作者X',
+                    charter: '创作者X',
+                    difficulties: ['HD', 'IN', 'AT'],
+                    levels: ['8', '12', '15'],
+                    tags: ['常规赛道'],
+                    downloadLink: '#'
+                }
+                // 添加更多...
+            ],
+            '3rdBBC': [],
+            '2ndBBC': [],
+            '1stBBC': [],
+            '0thBBC': []
+        };
+
+        let currentEdition = '';
+        let allCharts = [];
+
+        // 获取URL参数
+        function getUrlParameter(name) {
+            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+            var results = regex.exec(location.search);
+            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+        }
+
+        // 渲染谱面列表
+        function renderCharts(charts) {
+            const grid = document.getElementById('chartsGrid');
+            
+            if (charts.length === 0) {
+                grid.innerHTML = '<div class="no-results">😢 暂无谱面数据或搜索无结果</div>';
+                return;
+            }
+
+            grid.innerHTML = '';
+            
+            charts.forEach((chart, index) => {
+                const card = document.createElement('div');
+                card.className = 'chart-card';
+                
+                const difficultiesHtml = chart.difficulties.map((diff, i) => 
+                    `<span class="tag difficulty-${diff.toLowerCase()}">${diff} Lv.${chart.levels[i]}</span>`
+                ).join('');
+
+                const tagsHtml = chart.tags.map(tag => 
+                    `<span class="tag">${tag}</span>`
+                ).join('');
+                
+                card.innerHTML = `
+                    <div class="chart-title">🎵 ${chart.title}</div>
+                    <div class="chart-info">🎼 曲师：${chart.author}</div>
+                    <div class="chart-info">✍️ 谱师：${chart.charter}</div>
+                    <div class="chart-tags">
+                        ${difficultiesHtml}
+                        ${tagsHtml}
+                    </div>
+                    <button class="download-single-btn" onclick="downloadChart(${index})">
+                        ⬇️ 下载此谱面
+                    </button>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        // 搜索功能
+        function searchCharts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            const filtered = allCharts.filter(chart => {
+                return chart.title.toLowerCase().includes(searchTerm) ||
+                       chart.author.toLowerCase().includes(searchTerm) ||
+                       chart.charter.toLowerCase().includes(searchTerm) ||
+                       chart.difficulties.some(d => d.toLowerCase().includes(searchTerm)) ||
+                       chart.tags.some(t => t.toLowerCase().includes(searchTerm));
+            });
+            
+            renderCharts(filtered);
+        }
+
+        // 下载单个谱面
+        function downloadChart(index) {
+            const chart = allCharts[index];
+            alert(`正在下载：${chart.title}\n（实际使用时替换为真实下载链接）`);
+            // window.location.href = chart.downloadLink;
+        }
+
+        // 批量下载
+        function downloadAll() {
+            alert(`正在打包下载 ${currentEdition} 全部谱面...\n（实际使用时替换为真实下载链接）`);
+            // window.location.href = 'path/to/all-charts.zip';
+        }
+
+        // 主题切换
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+            
+            if (newTheme === 'dark') {
+                icon.textContent = '☀️';
+                text.textContent = '亮色模式';
+            } else {
+                icon.textContent = '🌙';
+                text.textContent = '暗色模式';
+            }
+        }
+
+        // 页面加载
+        window.onload = function() {
+            // 恢复主题
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+            
+            if (savedTheme === 'dark') {
+                icon.textContent = '☀️';
+                text.textContent = '亮色模式';
+            }
+
+            // 获取届次
+            currentEdition = getUrlParameter('edition') || '6thBBC';
+            allCharts = chartsDatabase[currentEdition] || [];
+
+            // 更新标题
+            const editionNames = {
+                '6thBBC': '第六届憋憋杯',
+                '5thBBC': '第五届憋憋杯',
+                '4thBBC': '第四届憋憋杯',
+                '3rdBBC': '第三届憋憋杯',
+                '2ndBBC': '第二届憋憋杯',
+                '1stBBC': '第一届憋憋杯',
+                '0thBBC': '第一届憋憋杯预热赛'
+            };
+
+            document.getElementById('editionTitle').textContent = editionNames[currentEdition] + ' 谱面下载';
+            document.getElementById('editionDesc').textContent = `共 ${allCharts.length} 个谱面作品`;
+
+            // 渲染谱面
+            renderCharts(allCharts);
+
+            // 绑定搜索事件
+            document.getElementById('searchInput').addEventListener('input', searchCharts);
+        };
+    </script>
+</body>
+</html>
