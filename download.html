@@ -208,7 +208,6 @@
         }
 
         .tag {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 5px 12px;
             border-radius: 15px;
@@ -220,6 +219,7 @@
         .tag.difficulty-hd { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
         .tag.difficulty-in { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
         .tag.difficulty-at { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .tag.difficulty-sp { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); }
         
         .tag.track-regular { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
         .tag.track-fun { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
@@ -336,50 +336,19 @@
     </div>
 
     <script>
-        // 谱面数据库（示例数据 - 实际数据由 Python 程序生成）
+        // 谱面数据库（由 Python 程序生成）
         const chartsDatabase = {
-            '5thBBC': [
-                {
-                    title: 'Example Song 1',
-                    author: '曲师A',
-                    difficulties: ['EZ', 'HD', 'IN', 'AT'],
-                    levels: ['5', '9', '13', '15'],
-                    tags: ['常规赛道'],
-                    downloadLink: 'charts/5thBBC/G-example1.pez'
-                },
-                {
-                    title: 'Example Song 2',
-                    author: '曲师B',
-                    difficulties: ['HD', 'IN'],
-                    levels: ['10', '14'],
-                    tags: ['娱乐赛道'],
-                    downloadLink: 'charts/5thBBC/J-example2.pez'
-                },
-                {
-                    title: 'Example Song 3',
-                    author: '曲师C',
-                    difficulties: ['EZ', 'HD', 'IN', 'AT'],
-                    levels: ['6', '11', '14', '16'],
-                    tags: ['常规赛道'],
-                    downloadLink: 'charts/5thBBC/G-example3.pez'
-                }
-            ],
-            '0thBBC': [
-                {
-                    title: 'Test Chart',
-                    author: '作者X',
-                    difficulties: ['HD', 'IN'],
-                    levels: ['8', '12'],
-                    tags: ['大粪赛道'],
-                    downloadLink: 'charts/0thBBC/S-test.pez'
-                }
-            ]
+            '5thBBC': [],
+            '4thBBC': [],
+            '3rdBBC': [],
+            '2ndBBC': [],
+            '1stBBC': [],
+            '0thBBC': []
         };
 
         let currentEdition = '';
         let allCharts = [];
 
-        // 获取URL参数
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
             var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
@@ -387,7 +356,6 @@
             return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
         }
 
-        // 获取赛道标签样式类
         function getTrackClass(tag) {
             if (tag === '常规赛道') return 'track-regular';
             if (tag === '娱乐赛道') return 'track-fun';
@@ -395,7 +363,6 @@
             return '';
         }
 
-        // 渲染谱面列表
         function renderCharts(charts) {
             const grid = document.getElementById('chartsGrid');
             
@@ -411,7 +378,7 @@
                 card.className = 'chart-card';
                 
                 const difficultiesHtml = chart.difficulties.map((diff, i) => 
-                    `<span class="tag difficulty-${diff.toLowerCase()}">${diff} Lv.${chart.levels[i]}</span>`
+                    `<span class="tag difficulty-${diff.toLowerCase()}">${diff} ${chart.levels[i]}</span>`
                 ).join('');
 
                 const tagsHtml = chart.tags.map(tag => 
@@ -434,7 +401,6 @@
             });
         }
 
-        // 搜索功能
         function searchCharts() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             
@@ -448,19 +414,15 @@
             renderCharts(filtered);
         }
 
-        // 下载单个谱面
         function downloadChart(index) {
             const chart = allCharts[index];
             window.location.href = chart.downloadLink;
         }
 
-        // 批量下载
         function downloadAll() {
             alert(`正在打包下载 ${currentEdition} 全部谱面...\n（实际使用时替换为真实下载链接）`);
-            // window.location.href = `charts/${currentEdition}/all.zip`;
         }
 
-        // 主题切换
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
@@ -481,9 +443,7 @@
             }
         }
 
-        // 页面加载
         window.onload = function() {
-            // 恢复主题
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
             
@@ -495,28 +455,22 @@
                 text.textContent = '亮色模式';
             }
 
-            // 获取届次
             currentEdition = getUrlParameter('edition') || '5thBBC';
             allCharts = chartsDatabase[currentEdition] || [];
 
-            // 更新标题
             const editionNames = {
-                '6thBBC': '第六届憋憋杯',
                 '5thBBC': '第五届憋憋杯',
                 '4thBBC': '第四届憋憋杯',
                 '3rdBBC': '第三届憋憋杯',
                 '2ndBBC': '第二届憋憋杯',
-                '1stBBC': '第一届憋憋杯'
-                '0thBBC': '第一届憋憋杯（预热赛）'
+                '1stBBC': '第一届憋憋杯',
+                '0thBBC': '第一届预热赛'
             };
 
             document.getElementById('editionTitle').textContent = editionNames[currentEdition] + ' 谱面下载';
             document.getElementById('editionDesc').textContent = `共 ${allCharts.length} 个谱面作品`;
 
-            // 渲染谱面
             renderCharts(allCharts);
-
-            // 绑定搜索事件
             document.getElementById('searchInput').addEventListener('input', searchCharts);
         };
     </script>
