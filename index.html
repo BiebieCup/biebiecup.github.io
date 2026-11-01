@@ -7,21 +7,9 @@
 <meta name="description" content="第六届憋憋杯（BBC）是由 B 站 UP 主伍零柒壹主办的 Phigros 自制谱比赛。投稿 2026.08.24 – 2027.01.27，直播 2027.02.08。赛道、规则、投稿模板、奖品与常见问题一站查看。">
 <meta name="theme-color" content="#06060b">
 <meta name="color-scheme" content="dark">
-<script>try{if(window.localStorage.getItem('bbc6.announce.account')==='1'){document.documentElement.classList.add('no-announce');}}catch(e){}</script>
 <meta property="og:title" content="第六届憋憋杯 · 参赛指南">
 <meta property="og:description" content="Phigros 自制谱比赛 · 双赛道 · 有名赛 · 投稿 2026.08.24 – 2027.01.27">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://biebiecup.qzz.io/">
-<meta property="og:site_name" content="第六届憋憋杯">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://biebiecup.qzz.io/assets/og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="第六届憋憋杯 · Phigros 自制谱面比赛 · 2026.08.24 – 2027.01.27">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="第六届憋憋杯 · 参赛指南">
-<meta name="twitter:description" content="Phigros 自制谱比赛 · 双赛道 · 有名赛 · 投稿 2026.08.24 – 2027.01.27">
-<meta name="twitter:image" content="https://biebiecup.qzz.io/assets/og.png">
 <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -29,14 +17,6 @@
 
 <a class="skip-link" href="#main">跳到主要内容</a>
 <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
-
-<div class="announce" id="announce" role="region" aria-label="赛事公告">
-  <div class="wrap announce-inner">
-    <p class="announce-text"><span class="announce-tag">公告</span>直播账号已更新为 <b>B 站 @夜肆-スタート</b>（UID 1265371993），直播时间不变。</p>
-    <a class="announce-link" href="#live">查看直播信息 →</a>
-    <button class="announce-close" id="announceClose" type="button" aria-label="关闭公告">✕</button>
-  </div>
-</div>
 
 <header class="site-header" id="siteHeader">
   <div class="wrap header-inner">
@@ -102,7 +82,6 @@
           <div class="cd-unit"><span class="cd-num" id="cdS">--</span><span class="cd-name">秒</span></div>
         </div>
         <p class="cd-status" id="cdStatus">正在读取赛事时间…</p>
-        <p class="cd-local" id="localDeadline"></p>
       </div>
     </div>
   </section>
@@ -314,13 +293,6 @@
       <div class="callout reveal">
         <strong>时间可能有变。</strong>如遇特殊情况，主办方将视情况决定是否延期，并另行通知。请以赛事 QQ 群与主办方最新公告为准。
       </div>
-
-      <div class="cal-row reveal">
-        <span class="cal-label">加入日历</span>
-        <button class="cal-btn" type="button" data-ics="deadline">截稿提醒<span>2027.01.27 00:00</span></button>
-        <button class="cal-btn" type="button" data-ics="live">直播提醒<span>2027.02.08 19:00</span></button>
-        <span class="cal-note">下载 .ics 后双击导入即可</span>
-      </div>
     </div>
   </section>
 
@@ -462,42 +434,6 @@
             <li>截稿后原则上不接受大幅修改；恶性 bug 可视情况补交修复版；非特殊情况不接受撤稿</li>
           </ul>
         </article>
-      </div>
-
-      <!-- 文件体检 -->
-      <div class="checker reveal" id="checker">
-        <div class="checker-head">
-          <div>
-            <p class="checker-kicker">本地工具 · 不上传</p>
-            <h3>投稿文件体检</h3>
-            <p class="checker-sub">拖入 <code>.pez</code> / <code>.zip</code>，检查谱面、音频、曲绘是否齐全，读出曲目时长，并按规范重命名下载。文件只在你的浏览器里解析。</p>
-          </div>
-          <span class="checker-badge">离线可用</span>
-        </div>
-
-        <div class="drop" id="dropZone" tabindex="0" role="button" aria-controls="fileInput">
-          <input type="file" id="fileInput" accept=".pez,.zip,application/zip" hidden>
-          <svg class="drop-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 16V4"/><path d="m7 9 5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/>
-          </svg>
-          <p class="drop-main"><b>拖入文件</b> 或 <span class="drop-link">点击选择</span></p>
-          <p class="drop-hint">支持 .pez / .zip · 全程本地处理</p>
-        </div>
-
-        <div class="check-panel" id="checkPanel" hidden>
-          <div class="check-file">
-            <span class="check-name" id="checkName"></span>
-            <span class="check-size" id="checkSize"></span>
-          </div>
-          <ul class="check-list" id="checkList" aria-live="polite"></ul>
-          <p class="check-verdict" id="checkVerdict"></p>
-          <div class="rename">
-            <label>曲名<input id="renameSong" type="text" placeholder="填写曲名" autocomplete="off" spellcheck="false"></label>
-            <label>赛道<select id="renameTrack"><option>常规</option><option>娱乐</option></select></label>
-            <label>类型<select id="renameType"><option>单人</option><option>多人</option></select></label>
-            <button class="btn btn-ghost btn-sm" id="renameBtn" type="button">下载重命名副本</button>
-          </div>
-        </div>
       </div>
 
       <div class="grid g-2">
@@ -694,7 +630,6 @@
             <div><dt>UID</dt><dd>1265371993</dd></div>
             <div><dt>直播间</dt><dd><a href="https://live.bilibili.com/1881508246" target="_blank" rel="noopener">1881508246<span aria-hidden="true"> ↗</span></a></dd></div>
           </dl>
-          <p class="live-local" id="localLive"></p>
           <p class="live-note">直播账号暂定，如有调整以主办方通知为准。</p>
         </article>
 
