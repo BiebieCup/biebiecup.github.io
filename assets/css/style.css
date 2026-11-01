@@ -788,6 +788,123 @@ body.nav-open .menu-btn span:nth-child(3) { transform: translateY(-6.6px) rotate
 section[id], #top { scroll-margin-top: 84px; }
 
 /* ==========================================================================
+   announce banner
+   ========================================================================== */
+.announce {
+  position: relative;
+  z-index: 95;
+  background:
+    linear-gradient(90deg, rgba(139, 123, 255, 0.16), rgba(78, 225, 193, 0.09) 60%, rgba(6, 6, 11, 0));
+  border-bottom: 1px solid rgba(78, 225, 193, 0.22);
+}
+.announce-inner { display: flex; align-items: center; gap: 14px; padding: 9px 0; }
+.announce-text { font-size: 0.82rem; color: #c9d0e0; }
+.announce-text b { color: #fff; font-weight: 600; }
+.announce-tag {
+  display: inline-block; margin-right: 8px; padding: 1px 8px;
+  border-radius: 999px; font-family: var(--mono); font-size: 0.62rem;
+  letter-spacing: 0.12em; color: #04211b; background: var(--mint);
+  vertical-align: 1px;
+}
+.announce-link { margin-left: auto; font-size: 0.78rem; color: var(--mint); white-space: nowrap; }
+.announce-link:hover { text-decoration: underline; }
+.announce-close {
+  width: 26px; height: 26px; flex-shrink: 0;
+  display: grid; place-items: center;
+  border-radius: 7px; border: 1px solid var(--line);
+  background: transparent; color: var(--muted);
+  font-size: 0.66rem; cursor: pointer; transition: color 0.2s, border-color 0.2s;
+}
+.announce-close:hover { color: #fff; border-color: var(--line-strong); }
+.no-announce .announce { display: none; }
+
+/* ---------- countdown local time ---------- */
+.cd-local { margin-top: 7px; font-size: 0.72rem; color: var(--dim); }
+.cd-local b { color: #b7bfd2; font-weight: 500; }
+
+/* ---------- calendar buttons ---------- */
+.cal-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 14px; }
+.cal-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; color: var(--dim); }
+.cal-btn {
+  display: inline-flex; align-items: baseline; gap: 8px;
+  padding: 7px 12px; border-radius: 9px;
+  border: 1px solid var(--line-strong);
+  background: rgba(255, 255, 255, 0.03);
+  color: #d7dded; font-size: 0.8rem; cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.cal-btn span { font-family: var(--mono); font-size: 0.68rem; color: var(--dim); }
+.cal-btn:hover { border-color: rgba(78, 225, 193, 0.5); background: rgba(78, 225, 193, 0.07); color: #fff; }
+.cal-note { font-size: 0.72rem; color: var(--dim); }
+
+/* ==========================================================================
+   chart checker
+   ========================================================================== */
+.checker {
+  margin: 22px 0 26px;
+  padding: 24px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(78, 225, 193, 0.24);
+  background: linear-gradient(170deg, rgba(78, 225, 193, 0.06), rgba(139, 123, 255, 0.05));
+}
+.checker-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.checker-kicker { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; color: var(--mint); margin-bottom: 6px; }
+.checker h3 { font-size: 1.24rem; margin-bottom: 6px; }
+.checker-sub { color: var(--muted); font-size: 0.86rem; max-width: 72ch; }
+.checker-badge {
+  flex-shrink: 0; font-family: var(--mono); font-size: 0.66rem;
+  color: var(--mint); border: 1px solid rgba(78, 225, 193, 0.35);
+  padding: 4px 10px; border-radius: 999px; white-space: nowrap;
+}
+.drop {
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  padding: 28px 20px; text-align: center;
+  border-radius: 14px; border: 1.5px dashed rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s;
+}
+.drop:hover, .drop:focus-visible { border-color: rgba(78, 225, 193, 0.6); background: rgba(78, 225, 193, 0.05); outline: none; }
+.drop.is-over { border-color: var(--mint); background: rgba(78, 225, 193, 0.1); }
+.drop-ico { width: 30px; height: 30px; color: var(--mint); margin-bottom: 4px; }
+.drop-main { font-size: 0.92rem; color: #c9d0e0; }
+.drop-main b { color: #fff; }
+.drop-link { color: var(--mint); border-bottom: 1px solid rgba(78, 225, 193, 0.4); }
+.drop-hint { font-size: 0.74rem; color: var(--dim); }
+
+.check-panel { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+.check-file { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; margin-bottom: 12px; }
+.check-name { font-weight: 600; font-size: 0.92rem; word-break: break-all; }
+.check-size { font-family: var(--mono); font-size: 0.72rem; color: var(--dim); }
+.check-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.check-list li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: 0.86rem; color: #c3c9d8; }
+.check-list .c-ico { width: 14px; flex-shrink: 0; font-family: var(--mono); font-size: 0.82rem; }
+.check-list .c-ok .c-ico { color: var(--mint); }
+.check-list .c-warn .c-ico { color: var(--gold); }
+.check-list .c-bad .c-ico { color: var(--danger); }
+.check-list .c-k { color: var(--muted); }
+.check-list .c-v { margin-left: auto; font-family: var(--mono); font-size: 0.76rem; color: #dde3f0; text-align: right; }
+
+.check-verdict { font-size: 0.88rem; padding: 10px 14px; border-radius: 10px; border: 1px solid var(--line); background: rgba(255, 255, 255, 0.03); color: #c3c9d8; }
+.check-verdict.ok { color: #bff5e8; border-color: rgba(78, 225, 193, 0.35); background: rgba(78, 225, 193, 0.07); }
+.check-verdict.warn { color: #ffe3ab; border-color: rgba(255, 204, 102, 0.35); background: rgba(255, 204, 102, 0.07); }
+.check-verdict.bad { color: #ffc3cc; border-color: rgba(255, 107, 129, 0.35); background: rgba(255, 107, 129, 0.08); }
+
+.rename { display: grid; grid-template-columns: 1.4fr 0.8fr 0.8fr auto; gap: 10px; align-items: end; margin-top: 14px; }
+.rename label { display: flex; flex-direction: column; gap: 5px; font-size: 0.72rem; color: var(--dim); }
+.rename input, .rename select {
+  width: 100%; padding: 9px 11px; border-radius: 8px;
+  border: 1px solid var(--line-strong);
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--text); font-family: var(--font); font-size: 0.84rem;
+}
+.rename input:focus, .rename select:focus { outline: none; border-color: rgba(78, 225, 193, 0.6); box-shadow: 0 0 0 3px rgba(78, 225, 193, 0.12); }
+.rename .btn { white-space: nowrap; }
+
+/* ---------- live local time ---------- */
+.live-local { font-size: 0.78rem; color: var(--dim); margin-bottom: 10px; }
+
+/* ==========================================================================
    responsive
    ========================================================================== */
 @media (max-width: 1080px) {
@@ -841,9 +958,23 @@ section[id], #top { scroll-margin-top: 84px; }
   .stats { grid-template-columns: 1fr 1fr; }
 }
 
+@media (max-width: 720px) {
+  .announce-inner { flex-wrap: wrap; gap: 6px 12px; padding: 8px 0; }
+  .announce-text { font-size: 0.76rem; }
+  .announce-link { margin-left: 0; }
+  .checker { padding: 18px; }
+  .checker-head { flex-direction: column; gap: 10px; }
+  .check-list .c-v { margin-left: 0; width: 100%; text-align: left; padding-left: 24px; }
+  .rename { grid-template-columns: 1fr 1fr; }
+  .rename .btn { grid-column: 1 / -1; }
+  .cal-row { gap: 8px; }
+}
+
 @media (max-width: 560px) {
   .hero-cta { gap: 10px; }
   .hero-cta .btn { flex: 1 1 100%; }
+  .rename { grid-template-columns: 1fr; }
+  .rename .btn { grid-column: auto; }
 }
 
 @media (max-width: 420px) {
@@ -868,7 +999,7 @@ section[id], #top { scroll-margin-top: 84px; }
 
 @media print {
   body { background: #fff; color: #111; }
-  .site-header, .hero-canvas, .hero-glow, .ticker, .to-top, .progress, .hero-cta, .gen, .checklist { display: none !important; }
+  .site-header, .hero-canvas, .hero-glow, .ticker, .to-top, .progress, .hero-cta, .gen, .checklist, .announce, .cal-row, .checker { display: none !important; }
   .reveal, .reveal.is-in { opacity: 1 !important; animation: none !important; transform: none !important; }
   .section { padding: 18px 0; border-color: #ddd; }
   .card, .tl-body, .acc, .code-card { border-color: #ccc; background: #fff; box-shadow: none; }
